@@ -16,6 +16,6 @@ export default async () => {
       max: process.env.R7PLATFORM_WORKER_METADATA_DB_POOL_MAX ?
         Number(process.env.R7PLATFORM_WORKER_METADATA_DB_POOL_MAX) : 500,
     },
-    debug: process.env.R7PLATFORM_WORKER_METADATA_DB_DEBUG === "Y" ? true : false,
+    debug: process.env.NODE_ENV === "development" ? true : false,
   })
 }
