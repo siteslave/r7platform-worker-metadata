@@ -11,11 +11,10 @@ const redisConfiguration = {
   }
 }
 
-const ZONE = process.env.R7PLATFORM_WORKER_METADATA_QUEUE || 'METADATA'
 const CONCURRENCY = process.env.R7PLATFORM_WORKER_METADATA_CONCURRENCY ?
   Number(process.env.R7PLATFORM_WORKER_METADATA_CONCURRENCY) : 4
 
-const worker = new Worker(ZONE, tasks, {
+const worker = new Worker('METADATA', tasks, {
   limiter: {
     max: 100,
     duration: 1000,
@@ -27,14 +26,11 @@ const worker = new Worker(ZONE, tasks, {
 // Job success
 worker.on('completed', (job: any) => {
   console.info(`${job.id} has completed!`)
-  // 1. add to metadata queue
-  // 2. add to notify queue
 });
 
 // Job failed
 worker.on('failed', (job: any, err: any) => {
   console.error(`${job.id} has failed with ${err.message}`)
-  // add to error queue
 });
 
 // Worker error
