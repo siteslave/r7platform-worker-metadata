@@ -4,16 +4,16 @@ import tasks from './tasks'
 
 const redisConfiguration = {
   connection: {
-    host: process.env.R7PLATFORM_WORKER_REDIS_HOST || "localhost",
-    port: Number(process.env.R7PLATFORM_WORKER_REDIS_PORT) || 6379,
+    host: process.env.R7PLATFORM_WORKER_METADATA_REDIS_HOST || "localhost",
+    port: Number(process.env.R7PLATFORM_WORKER_METADATA_REDIS_PORT) || 6379,
     enableOfflineQueue: false,
-    password: process.env.R7PLATFORM_WORKER_REDIS_PASSWORD || "redispw"
+    password: process.env.R7PLATFORM_WORKER_METADATA_REDIS_PASSWORD || "redispw"
   }
 }
 
-const ZONE = process.env.R7PLATFORM_WORKER_ZONE || 'R7QUEUE'
-const CONCURRENCY = process.env.R7PLATFORM_WORKER_CONCURRENCY ?
-  Number(process.env.R7PLATFORM_WORKER_CONCURRENCY) : 4
+const ZONE = process.env.R7PLATFORM_WORKER_METADATA_QUEUE || 'METADATA'
+const CONCURRENCY = process.env.R7PLATFORM_WORKER_METADATA_CONCURRENCY ?
+  Number(process.env.R7PLATFORM_WORKER_METADATA_CONCURRENCY) : 4
 
 const worker = new Worker(ZONE, tasks, {
   limiter: {

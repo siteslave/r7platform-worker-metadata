@@ -1,1 +1,1 @@
-docker build -t mophos/r7platform-worker . --no-cache
+docker build -t mophos/r7platform-worker-metadata . --no-cache
