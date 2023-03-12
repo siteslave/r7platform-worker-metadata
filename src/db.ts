@@ -1,5 +1,7 @@
+import { Knex } from "knex"
 
-export default async () => {
+export default async (): Promise<Knex<any, any[]>> => {
+
   return require('knex')({
     client: 'pg',
     connection: {
@@ -10,12 +12,6 @@ export default async () => {
       database: process.env.R7PLATFORM_WORKER_METADATA_DB_NAME || 'test',
     },
     searchPath: [process.env.R7PLATFORM_WORKER_METADATA_DB_SCHEMA || 'metadata'],
-    pool: {
-      min: process.env.R7PLATFORM_WORKER_METADATA_DB_POOL_MIN ?
-        Number(process.env.R7PLATFORM_WORKER_METADATA_DB_POOL_MIN) : 0,
-      max: process.env.R7PLATFORM_WORKER_METADATA_DB_POOL_MAX ?
-        Number(process.env.R7PLATFORM_WORKER_METADATA_DB_POOL_MAX) : 100,
-    },
     debug: process.env.NODE_ENV === "development" ? true : false,
   })
 }
