@@ -10,9 +10,9 @@ export class MetaModel {
         .onConflict(['hospcode', 'hn', 'ingress_zone'])
         .merge(['cid', 'fname', 'lname', 'birth', 'sex', 'd_update', 'updated_at'])
         .then(() => resolve())
+        .catch((error: any) => reject(error))
         .finally(async () => {
           await db.destroy();
-          resolve();
         });
     });
   }
@@ -25,9 +25,9 @@ export class MetaModel {
         .onConflict(['hospcode', 'hn', 'seq', 'date_serv', 'ingress_zone'])
         .merge(['time_serv', 'diag_text', 'updated_at'])
         .then(() => resolve())
+        .catch((error: any) => reject(error))
         .finally(async () => {
           await db.destroy();
-          resolve();
         });
     });
   }
