@@ -22,8 +22,8 @@ export class MetaModel {
     return new Promise((resolve: any, reject: any) => {
       db('opd')
         .insert(data)
-        .onConflict(['hospcode', 'hn', 'seq', 'date_serv', 'ingress_zone'])
-        .merge(['time_serv', 'diag_text', 'updated_at'])
+        .onConflict(['hospcode', 'hn', 'ingress_zone'])
+        .merge(['seq', 'date_serv', 'time_serv', 'diag_text', 'chiefcomp', 'updated_at'])
         .then(() => resolve())
         .catch((error: any) => reject(error))
         .finally(async () => {
@@ -37,8 +37,8 @@ export class MetaModel {
     return new Promise((resolve: any, reject: any) => {
       db('ipd')
         .insert(data)
-        .onConflict(['hospcode', 'hn', 'an', 'ingress_zone'])
-        .merge(['dischs', 'discht', 'dateadm', 'timeadm', 'datedsc', 'timedsc', 'updated_at'])
+        .onConflict(['hospcode', 'hn', 'ingress_zone'])
+        .merge(['an', 'dischs', 'discht', 'dateadm', 'timeadm', 'datedsc', 'timedsc', 'updated_at'])
         .then(() => resolve())
         .catch((error: any) => reject(error))
         .finally(async () => {
