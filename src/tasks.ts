@@ -8,7 +8,7 @@ export default async (job: any) => {
   switch (job.name) {
     case 'PERSON': {
       const data = job.data.metadata
-      metaModel.savePerson(data)
+      await metaModel.savePerson(data)
       break
     }
     case 'OPD': {
@@ -31,12 +31,12 @@ export default async (job: any) => {
         obj.updated_at = item.updated_at;
         data.push(obj);
       }
-      metaModel.saveOpd(data)
+      await metaModel.saveOpd(data)
       break
     }
     case 'IPD': {
       const data = job.data.metadata
-      metaModel.saveIpd(data)
+      await metaModel.saveIpd(data)
       break
     }
 
